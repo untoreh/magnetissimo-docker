@@ -18,7 +18,10 @@ RUN openrc && \
   /etc/init.d/postgresql stop && \
   rm -rf /var/cache/apk/*
 
-CMD ["openrc", "mix phoenix.server"]
+EXPOSE 80
+VOLUME ["/var/lib/postgresql"]
+
+CMD ["/bin/sh", "-c", "openrc -o default; /etc/init.d/postgresql restart; cd /magnetissimo && exec mix phoenix.server"]
 
 
 
