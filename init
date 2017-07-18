@@ -2,7 +2,6 @@
 
 rm -rf /run/postgresql && mkdir -p /run/postgresql
 rm -rf /tmp/.s*
-mv /root/.mix $HOME/
 
 mkdir -p $PGDATA
 pg_ctl initdb -D $PGDATA -U $(whoami)
@@ -16,4 +15,4 @@ ALTER USER torrent CREATEDB;
 \q
 EOP
 
-exec mix phoenix.server
+/rel/bin/magnetissimo foreground
