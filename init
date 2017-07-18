@@ -3,6 +3,7 @@
 rm -rf /run/postgresql && mkdir -p /run/postgresql
 rm -rf /tmp/.s*
 ln -s /root/.mix $HOME/ 2>/dev/null
+ln -s /root/.mix $PWD/ 2>/dev/null
 
 mkdir -p $PGDATA
 pg_ctl initdb -D $PGDATA -U $(whoami)
