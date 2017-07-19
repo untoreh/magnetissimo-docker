@@ -27,7 +27,7 @@ RUN apk add -t buildenv $(apk --update search -q erlang) elixir postgresql git l
   su postgres -c "pg_ctl stop -D ${PGDATA} -s -m fast" && \
   rm -rf $PGDATA && mkdir $PGDATA && \
   apk del --purge buildenv && \
-  apk add erlang postgresql libressl ca-certificates && \
+  apk add postgresql libressl ca-certificates && \
   mv _build/prod/rel/magnetissimo/ /rel && \
   rm -rf /var/cache/apk/* /magnetissimo
 
