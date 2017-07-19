@@ -14,3 +14,4 @@ sed -r 's/pool_size: 50/pool_size: 50,/' -i ./config/dev.exs
 echo '  password: "CHANGE_ME",' >> ./config/dev.exs
 echo '  username: "torrent"' >> ./config/dev.exs
 
+sed 's/:sizeable]]/:sizeable, :scrivener_ecto, :scrivener_html]]/' -i ./mix.exs
