@@ -8,6 +8,7 @@ ENV MIX_ENV=prod
 
 COPY ./*.sh /usr/local/bin/
 COPY ./init /init
+COPY ./tasks.ex /tmp/tasks.ex
 
 RUN apk add -t buildenv $(apk --update search -q erlang) elixir postgresql git libressl nodejs-npm  && \
   mkdir -p $PGDIR /run/postgresql && chmod 777 $PGDIR /run/postgresql && \
@@ -15,8 +16,9 @@ RUN apk add -t buildenv $(apk --update search -q erlang) elixir postgresql git l
   pg_ctl start -D ${PGDATA} -s -w -t ${PGSTARTTIMEOUT}" && \
   git clone https://github.com/sergiotapia/magnetissimo.git && \
   cd magnetissimo && \
+  mv /tmp/tasks.ex lib/ && \
   echo -e 'Y\nY\n' | mix deps.get && \
-  createdb.sh && \
+  su postgres -c createdb.sh && \
   config.sh && \
   echo -e 'Y\nY\n' | mix ecto.create ; \
   mix compile ; \

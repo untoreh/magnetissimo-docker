@@ -15,4 +15,7 @@ ALTER USER torrent CREATEDB;
 \q
 EOP
 
+## migration script for creating tables
+/rel/bin/magnetissimo command Elixir.Magnetissimo.Tasks change
+
 /rel/bin/magnetissimo foreground
