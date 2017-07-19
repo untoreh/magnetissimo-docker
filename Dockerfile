@@ -22,7 +22,8 @@ RUN apk add -t buildenv $(apk --update search -q erlang) elixir postgresql git l
   mix compile ; \
   echo -e 'Y\nY\n' | mix ecto.migrate && \
   npm install && \
-  cd /magnetissimo && mix release --env=prod && \
+  mix phoenix.digest && \
+  mix release --env=prod && \
   su postgres -c "pg_ctl stop -D ${PGDATA} -s -m fast" && \
   rm -rf $PGDATA && mkdir $PGDATA && \
   apk del --purge buildenv && \
